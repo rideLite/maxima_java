@@ -1,18 +1,13 @@
 package HomeWorks.hw_5;
 
-public class Book  extends Author{
+public class Book {
     private String bookName;
     private Author author;
     private int publicationYear;
 
-
-    public Book(String authorName, String authorSecondName, String bookName, int publicationYear) {
-        super(authorName, authorSecondName);
+    public Book(String bookName, Author author, int publicationYear) {
         this.bookName = bookName;
-        this.authorName = authorName;
-        this.authorSecondName = authorSecondName;
-
-//        this.author = author;
+        this.author = author;
         this.publicationYear = publicationYear;
     }
 
@@ -42,7 +37,7 @@ public class Book  extends Author{
     public String toString() {
         return "Book{" +
                 "bookName='" + bookName + '\'' +
-                ", author=" + authorName + " "+ authorSecondName+
+                ", author=" + author +
                 ", publicationYear=" + publicationYear +
                 '}';
     }
