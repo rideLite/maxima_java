@@ -47,12 +47,17 @@ public class Main {
 //        truck.service();
 
 
-        visitServiceStation(bicycle01, car01, truck01);
+        visitServiceStation(bicycle01);
+        System.out.println("////////////////////////");
+        visitServiceStation(car01);
+        System.out.println("////////////////////////");
+        visitServiceStation(truck01);
+        System.out.println("////////////////////////");
+
     }
-    public static void visitServiceStation(Bicycle bicycle, Car car, Truck truck){
-        bicycle.service();
-        car.service();
-        truck.service();
+
+    public static void visitServiceStation(WheeledTransport wheeledTransport) {
+        wheeledTransport.service();
     }
 
 
