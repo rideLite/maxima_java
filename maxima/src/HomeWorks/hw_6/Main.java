@@ -1,63 +1,75 @@
 package HomeWorks.hw_6;
 
-/**
- * 6. Принципы ООП
- * Задание для домашней работы по принципам ООП на примере классов WheeledTransport, Bicycle, MotorTransport, Car и Truck:
- * <p>
- * 1. Создайте класс WheeledTransport, который будет представлять колесный транспорт.
- * У класса должны быть приватные переменные для хранения количества колес и максимальной скорости
- * (поля задавайте сразу в конструкторе класса, так же делайте для полей последующих классов).
- * Реализуйте геттеры и сеттеры для этих переменных. Объявите метод service() для обслуживания,
- * который будет выводить информацию об обслуживании колёс (с указанием их количества, конечно, же),
- * например sout(“Обслужено колёс - ” + wheelCount);
- * <p>
- * 2. Создайте класс Bicycle, который будет наследоваться от класса WheeledTransport.
- * Добавьте приватную переменную для хранения типа велосипеда (горный, шоссейный и т.д.).
- * Реализуйте геттеры и сеттеры для этой переменной. Переопределите метод service(),
- * чтобы он возвращал информацию о типе обслуженного велосипеда (например, обслужено навесное оборудование
- * велосипеда типа «шоссейный»).
- * <p>
- * Внимание! Колеса тоже ведь нужно обслужить. Для этого в переопределенном методе service () сначала вызовите такой же
- * метод суперкласса super.service(), а потом уже выводите информацию о типе велосипеда.
- * <p>
- * 3. Создайте класс MotorTransport, который будет наследоваться от класса WheeledTransport. Добавьте приватную переменную
- * для хранения типа двигателя (бензиновый, дизельный и т.д.). Реализуйте геттеры и сеттеры для этой переменной. Аналогично
- * переопределите метод service(), чтобы он возвращал информацию об обслуживании двигателя и его типа (не забываем про колёса
- * из суперкласса).
- * <p>
- * 4. Создайте класс Car, который будет наследоваться от класса MotorTransport. Добавьте приватные переменные для хранения
- * марки и модели автомобиля. Реализуйте геттеры и сеттеры для этих переменных. Аналогично переопределите метод service()
- * <p>
- * 5. Создайте класс Truck, который будет наследоваться от класса MotorTransport. Добавьте приватную переменную для хранения
- * грузоподъемности грузовика. Реализуйте геттеры и сеттеры для этой переменной. Аналогично переопределите метод service()
- * <p>
- * 6. В методе main создайте объекты классов Bicycle, Car и Truck и передавайте их как параметры в метод visitServiceStation
- * (сами подставьте нужный тип параметра), внутри которого вызовите метод service() для каждого объекта
- */
+import java.util.Scanner;
+
 public class Main {
+
+    /**
+     * 1) К коду прошлой домашней работы добавить класс Scanner для считывания из консоли типа класса для создания нового объекта.
+     * Это может быть полное или сокращенное название класса, или даже цифра - главное,
+     * чтобы в зависимости от полученного значения переменная типа суперкласса инициализировалась объектом конкретного подкласса
+     * (через if else), и после этого передавалась в ваш метод visitServiceStation.
+     * <p>
+     * 2) Также в методе visitServiceStation произведите нисходящее преобразование полученного объекта, чтобы вызвать методы,
+     * специфичные для каждого подкласса (создайте по одному специфическому методу с разными названиями, отметьте их модификатором final).
+     * Не забывайте про проверку instanseOf, чтобы избежать ClassCastException).
+     *  3) Определите, какие из ваших классов не наследуются, и сделайте их финальными с помощью модификатора final.
+    */
+
+
     public static void main(String[] args) {
-        Bicycle bicycle01 = new Bicycle(2, 40, "cross - country");
+
+        System.out.println("Введите цифру, для создания объекта : \n" +
+                "1 --- для велосипеда \n" +
+                "2 --- для авто \n" +
+                "3 --- для грузовиков");
+
+        Scanner scanner = new Scanner(System.in);
+        String userChoise = scanner.nextLine();
+        if (userChoise.equals("1")) {
+            Bicycle bicycle01 = new Bicycle(2, 40, "cross - country");
+            visitServiceStation(bicycle01);
+        } else if (userChoise.equals("2")){
+            Car car01 = new Car(4, 180, "бензин", "BMW", "X5m");
+            visitServiceStation(car01);
+
+        } else if (userChoise.equals("3")){
+            Truck truck01 = new Truck(16, 160, "diesel", 20);
+            visitServiceStation(truck01);
+        }
+
+
+//        Bicycle bicycle01 = new Bicycle(2, 40, "cross - country");
 //        bicycle1.service();
 
 
-        Car car01 = new Car(4, 180, "бензин", "BMW", "X5m");
 //        car.service();
 //
-        Truck truck01 = new Truck(16, 160, "diesel", 20);
+//        Truck truck01 = new Truck(16, 160, "diesel", 20);
 //        truck.service();
 
-
-        visitServiceStation(bicycle01);
-        System.out.println("////////////////////////");
-        visitServiceStation(car01);
-        System.out.println("////////////////////////");
-        visitServiceStation(truck01);
-        System.out.println("////////////////////////");
+//
+//        visitServiceStation(bicycle01);
+//        System.out.println("////////////////////////");
+//        visitServiceStation(car01);
+//        System.out.println("////////////////////////");
+//        visitServiceStation(truck01);
+//        System.out.println("////////////////////////");
 
     }
 
     public static void visitServiceStation(WheeledTransport wheeledTransport) {
         wheeledTransport.service();
+        if (wheeledTransport instanceof Car) {
+            Car car = (Car)wheeledTransport;
+            car.blockTheDoors();
+        } else if(wheeledTransport instanceof Truck ){
+            Truck truck = (Truck)wheeledTransport;
+            truck.liftTheTrailer();
+        }else if(wheeledTransport instanceof Bicycle ){
+            Bicycle bicycle = (Bicycle)wheeledTransport;
+            bicycle.ringTheBell();
+        }
     }
 
 

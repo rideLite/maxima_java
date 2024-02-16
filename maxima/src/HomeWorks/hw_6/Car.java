@@ -1,8 +1,8 @@
 package HomeWorks.hw_6;
-/** 4. Создайте класс Car, который будет наследоваться от класса MotorTransport. Добавьте приватные переменные для хранения
- марки и модели автомобиля. Реализуйте геттеры и сеттеры для этих переменных. Аналогично переопределите метод service()
+
+/**
  */
-public class Car extends Motortransport {
+public final class Car extends Motortransport {
     private String brand;
     private String model;
 
@@ -28,9 +28,13 @@ public class Car extends Motortransport {
         this.model = model;
     }
 
+    final public static void blockTheDoors() {
+        System.out.println("Двери автомобиля заблокированы");
+    }
+
     @Override
     public void service() {
-        System.out.println("Была произведена ревизия автомобиля марки "+ brand + " модели " + model);
+        System.out.println("Была произведена ревизия автомобиля марки " + brand + " модели " + model);
         super.service();
 
     }
