@@ -1,6 +1,6 @@
 package HomeWorks.hw_6;
 
-public class Motortransport extends WheeledTransport {
+public abstract class Motortransport extends WheeledTransport {
     private String engineType;
 
     public Motortransport(int wheelCount, int maxSpeed, String engineType) {
@@ -21,9 +21,16 @@ public class Motortransport extends WheeledTransport {
     }
 
 
-    @Override
+    //    @Override
+//    public void service() {
+//        super.service();
+//        System.out.println("Был обслужен двигатель типа " + engineType);
+//    }
     public void service() {
         super.service();
+        checkEngine();
+    }
+    private void checkEngine(){
         System.out.println("Был обслужен двигатель типа " + engineType);
     }
 }

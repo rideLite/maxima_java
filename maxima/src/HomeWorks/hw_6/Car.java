@@ -1,6 +1,7 @@
 package HomeWorks.hw_6;
 
 /**
+ *
  */
 public final class Car extends Motortransport {
     private String brand;
@@ -34,9 +35,20 @@ public final class Car extends Motortransport {
 
     @Override
     public void service() {
-        System.out.println("Была произведена ревизия автомобиля марки " + brand + " модели " + model);
+        carCheck();
         super.service();
-
     }
+    private void carCheck(){
+        System.out.println("Была произведена ревизия автомобиля марки " + brand + " модели " + model);
+    }
+    /**
+     В подклассах вынести специфическое обслуживание из метода service в приватные методы, например:
+
+     public void service() {
+     super.service();
+     checkEngine();
+     }
+
+     private void checkEngine() {...}*/
 }
 

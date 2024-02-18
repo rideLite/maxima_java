@@ -1,6 +1,6 @@
 package HomeWorks.hw_6;
 
-public abstract class WheeledTransport {
+public abstract class WheeledTransport implements Transport {
     private int wheelCount;
     private int maxSpeed;
 

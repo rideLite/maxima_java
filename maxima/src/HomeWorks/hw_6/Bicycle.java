@@ -21,7 +21,11 @@ package HomeWorks.hw_6;
 
     @Override
     public void service() {
-        System.out.println("Обслужено навесное оборудование велосипеда типа «" + rideStyle + "»");
+        bikeCheck();
         super.service();
+    }
+
+    private void bikeCheck(){
+        System.out.println("Обслужено навесное оборудование велосипеда типа «" + rideStyle + "»");
     }
 }
