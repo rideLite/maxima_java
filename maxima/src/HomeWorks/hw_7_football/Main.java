@@ -39,10 +39,10 @@ public class Main {
         Player player5 = new Player();
         Player player6 = new Player();
 
-//        int currentPlayerStamina = player4.getStamina();
-//        for (int i = currentPlayerStamina; i >= 0; i--) {
-//            player4.run();
-//        }
+        int currentPlayerStamina = player4.getStamina();
+        for (int i = currentPlayerStamina; i >= 0; i--) {
+            player4.run();
+        }
         Player.info();
         Player player7 = new Player();
 
