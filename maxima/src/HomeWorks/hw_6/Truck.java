@@ -1,8 +1,9 @@
 package HomeWorks.hw_6;
-/**5. Создайте класс Truck, который будет наследоваться от класса MotorTransport. Добавьте приватную переменную для хранения
- грузоподъемности грузовика. Реализуйте геттеры и сеттеры для этой переменной. Аналогично переопределите метод service()
+
+/**
+ *
  */
-public class Truck extends Motortransport{
+public final class Truck extends Motortransport {
     private int liftCapacity;
 
     public int getLiftCapacity() {
@@ -18,10 +19,18 @@ public class Truck extends Motortransport{
         this.liftCapacity = liftCapacity;
     }
 
+    final public static void liftTheTrailer() {
+        System.out.println("Кузов грузовика поднят");
+    }
+
     @Override
     public void service() {
-        System.out.println("Грузоподъемность обслуживаемого грузовика состовляет " + liftCapacity+ " тонн.");
+        liftCheck();
         super.service();
     }
 
+    private void liftCheck() {
+        System.out.println("Грузоподъемность обслуживаемого грузовика состовляет " + liftCapacity + " тонн.");
+
+    }
 }

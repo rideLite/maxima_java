@@ -1,59 +1,65 @@
 package HomeWorks.hw_6;
 
-/**
- * 6. Принципы ООП
- * Задание для домашней работы по принципам ООП на примере классов WheeledTransport, Bicycle, MotorTransport, Car и Truck:
- * <p>
- * 1. Создайте класс WheeledTransport, который будет представлять колесный транспорт.
- * У класса должны быть приватные переменные для хранения количества колес и максимальной скорости
- * (поля задавайте сразу в конструкторе класса, так же делайте для полей последующих классов).
- * Реализуйте геттеры и сеттеры для этих переменных. Объявите метод service() для обслуживания,
- * который будет выводить информацию об обслуживании колёс (с указанием их количества, конечно, же),
- * например sout(“Обслужено колёс - ” + wheelCount);
- * <p>
- * 2. Создайте класс Bicycle, который будет наследоваться от класса WheeledTransport.
- * Добавьте приватную переменную для хранения типа велосипеда (горный, шоссейный и т.д.).
- * Реализуйте геттеры и сеттеры для этой переменной. Переопределите метод service(),
- * чтобы он возвращал информацию о типе обслуженного велосипеда (например, обслужено навесное оборудование
- * велосипеда типа «шоссейный»).
- * <p>
- * Внимание! Колеса тоже ведь нужно обслужить. Для этого в переопределенном методе service () сначала вызовите такой же
- * метод суперкласса super.service(), а потом уже выводите информацию о типе велосипеда.
- * <p>
- * 3. Создайте класс MotorTransport, который будет наследоваться от класса WheeledTransport. Добавьте приватную переменную
- * для хранения типа двигателя (бензиновый, дизельный и т.д.). Реализуйте геттеры и сеттеры для этой переменной. Аналогично
- * переопределите метод service(), чтобы он возвращал информацию об обслуживании двигателя и его типа (не забываем про колёса
- * из суперкласса).
- * <p>
- * 4. Создайте класс Car, который будет наследоваться от класса MotorTransport. Добавьте приватные переменные для хранения
- * марки и модели автомобиля. Реализуйте геттеры и сеттеры для этих переменных. Аналогично переопределите метод service()
- * <p>
- * 5. Создайте класс Truck, который будет наследоваться от класса MotorTransport. Добавьте приватную переменную для хранения
- * грузоподъемности грузовика. Реализуйте геттеры и сеттеры для этой переменной. Аналогично переопределите метод service()
- * <p>
- * 6. В методе main создайте объекты классов Bicycle, Car и Truck и передавайте их как параметры в метод visitServiceStation
- * (сами подставьте нужный тип параметра), внутри которого вызовите метод service() для каждого объекта
- */
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
+
+    /**
+     * В методе main создайте по два объекта каждого вида транспорта.
+     * Создайте объект типа ServiceStation и с помощью цикла foreach передайте все объекты транспорта на обслуживание
+     * в объект типа ServiceStation.
+     */
+
+
     public static void main(String[] args) {
-        Bicycle bicycle01 = new Bicycle(2, 40, "cross - country");
-//        bicycle1.service();
+        Transport car1 = new Car(4, 250, "diesel", "BMW", "X5m");
+        Transport car2 = new Car(4, 200, "gas", "Honda", "Accord");
+        ServiceStation serviceStation = new ServiceStation();
+        car1.service();
+        Transport truck1 = new Truck(8, 160, "diesel", 20);
+        Transport truck2 = new Truck(8, 150, "diesel", 15);
+        Transport bike1 = new Bicycle(2, 40, "cross-country");
+        Transport bike2 = new Bicycle(3, 10, "baby-bike");
 
+        Transport[] wheeledTransports = new WheeledTransport[6];
+        wheeledTransports[0] = car1;
+        wheeledTransports[1] = car2;
+        wheeledTransports[2] = truck1;
+        wheeledTransports[3] = truck2;
+        wheeledTransports[4] = bike1;
+        wheeledTransports[5] = bike2;
 
-        Car car01 = new Car(4, 180, "бензин", "BMW", "X5m");
-//        car.service();
-//
-        Truck truck01 = new Truck(16, 160, "diesel", 20);
-//        truck.service();
-
-
-        visitServiceStation(bicycle01, car01, truck01);
-    }
-    public static void visitServiceStation(Bicycle bicycle, Car car, Truck truck){
-        bicycle.service();
-        car.service();
-        truck.service();
+        for (Transport t : wheeledTransports) {
+            ServiceStation.visitServiceStation(t);
+        }
     }
 
 
 }
+
+/**
+ * 8. Абстракция и интерфейсы
+ * ТЕКСТ ЗАДАНИЯ
+ * Вынесите метод service в интерфейс Transport, который будет инмплементировать класс WheeledTransport.
+ * <p>
+ * В подклассах вынести специфическое обслуживание из метода service в приватные методы, например:
+ * <p>
+ * public void service() {
+ * super.service();
+ * checkEngine();
+ * }
+ * <p>
+ * private void checkEngine() {...}
+ * <p>
+ * Также не забудьте про специфичное обслуживание в классаx Car Truck, если не вводили его в прошлой домашке.
+ * <p>
+ * Обратите внимание на суперклассы, которые есть смысл сделать абстрактными, чтобы исключить возможность создавать от них объекты.
+ * Они должны быть абстрактными.
+ * Определите класс ServiceStation с методом visitServiceStation, который работает с общим типом
+ * Transport и не завязан на конкретный вид транспорта.
+ * <p>
+ * В методе main создайте по два объекта каждого вида транспорта.
+ * Создайте объект типа ServiceStation и с помощью цикла foreach передайте все объекты транспорта на обслуживание
+ * в объект типа ServiceStation.
+ */

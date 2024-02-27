@@ -1,12 +1,6 @@
 package HomeWorks.hw_6;
 
-/**
- * 3. Создайте класс MotorTransport, который будет наследоваться от класса WheeledTransport. Добавьте приватную переменную
- * для хранения типа двигателя (бензиновый, дизельный и т.д.). Реализуйте геттеры и сеттеры для этой переменной. Аналогично
- * переопределите метод service(), чтобы он возвращал информацию об обслуживании двигателя и его типа (не забываем про колёса
- * из суперкласса).
- */
-public class Motortransport extends WheeledTransport {
+public abstract class Motortransport extends WheeledTransport {
     private String engineType;
 
     public Motortransport(int wheelCount, int maxSpeed, String engineType) {
@@ -27,9 +21,16 @@ public class Motortransport extends WheeledTransport {
     }
 
 
-    @Override
+    //    @Override
+//    public void service() {
+//        super.service();
+//        System.out.println("Был обслужен двигатель типа " + engineType);
+//    }
     public void service() {
         super.service();
+        checkEngine();
+    }
+    private void checkEngine(){
         System.out.println("Был обслужен двигатель типа " + engineType);
     }
 }
